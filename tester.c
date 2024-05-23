@@ -1,17 +1,6 @@
-#include <stdarg.h>
 #include <stdio.h>
 #include <sys/wait.h>
 #include <unistd.h>
-
-void printf_hook(const char *fmt, ...) {
-  va_list args;
-  va_start(args, fmt);
-  vprintf(fmt, args);
-  fflush(0);
-  va_end(args);
-}
-
-int main_inner();
 
 typedef struct {
   FILE *save;
@@ -55,7 +44,7 @@ Options *get_options(Options *options) {
   return options;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
   Options options;
   get_options(&options);
 
@@ -68,7 +57,8 @@ int main() {
   pid_t pid = fork();
   if (pid == 0) {
     dup2(p[0], STDIN_FILENO);
-    main_inner();
+    char *args[] = {NULL};
+    execv(argv[1], args);
     return 0;
   } else {
     char buf;
@@ -102,6 +92,3 @@ int main() {
     kill(pid, SIGKILL);
   }
 }
-
-#define main main_inner
-#define printf printf_hook
