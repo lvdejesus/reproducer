@@ -1,11 +1,12 @@
 FILE=./main.c
-OUT=./temp.out
+TEMP=./temp.c
+OUT=./temp
 
 all: ./flush.c tester ${FILE}
-	cat ./flush.c ${FILE} > temp.c
-	gcc temp.c -o ${OUT}
+	cat ./flush.c ${FILE} > ${TEMP}
+	gcc ${TEMP} -o ${OUT}
 	./tester ${OUT}
-	@rm ${OUT}
+	@rm ${OUT} ${TEMP}
 
 tester: tester.c
 	gcc tester.c -o ./tester
