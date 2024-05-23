@@ -77,7 +77,9 @@ int main(int argc, char *argv[]) {
       read(STDOUT_FILENO, &buf, sizeof(char));
       if (buf != '\0') {
         if (buf == 24) { // ctrl X
-          fclose(options.save);
+          if (options.save != NULL) {
+            fclose(options.save);
+          }
           break;
         }
 
