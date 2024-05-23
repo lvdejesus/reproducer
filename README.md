@@ -4,8 +4,6 @@ Logs input to the terminal to be played back later.
 
 ## How to use
 
----
-
 Concatenate your program to `flush.c` then compile. Run with `tester`.
 
 ```bash
@@ -17,8 +15,6 @@ gcc temp.c -o temp
 ```
 
 ## Example
-
----
 
 Place `main.c` in the repository folder.
 
